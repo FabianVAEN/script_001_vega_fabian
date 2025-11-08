@@ -5,8 +5,7 @@
 }
 
 .demo {
-    display: flex;
-    gap: 15px; /*Espaciado entre los elementos*/
+    gap: 15px; 
     padding: 20px;
     background-color: aquamarine;
 }
@@ -19,15 +18,19 @@
     width: 50px;
     border: 1px solid aquamarine;
     border-radius: 10px;
-    transition: backgroun-color 1s, transform 0.35s; /*Tiempo de demorar para como reacciona*/
+    transition: backgroun-color 1s, transform 0.35s; 
 }
 
-/*Hacer un hover*/
-.content:hover{
+.fizz:hover{
     background-color: beige;
     border: 1px solid black;
-    transform: translateY(-5px) translateX(5px) rotate(5deg);
 }
+
+.buzz:hover{
+    border: 1px solid black;
+    transform: translateY(-5px) ;
+}
+
 
 .juan {
     background-color: brown;
