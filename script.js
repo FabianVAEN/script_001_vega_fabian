@@ -10,11 +10,16 @@ function createMatrix(dimension, container,divisorFizz,divisorBuzz){
         const div= document.createElement("div")
         addClass(div,"demo")
         for (let j=0; j<dimension; j++){
-            const content = document.createElement("div")
+            const content = document.createElement("div");
             addClass(content,"content")
             fizz(divisorFizz,content, counter)
             buzz(divisorBuzz,content, counter)
-            content.textContent = counter 
+            if (counter % divisorFizz !== 0 && counter % divisorBuzz !== 0 ){
+                addClass(content, "fizzbuzz")
+                content.textContent = counter
+            } else {
+                content.textContent = counter
+            }
             div.appendChild(content)
             counter++
         }
@@ -22,15 +27,16 @@ function createMatrix(dimension, container,divisorFizz,divisorBuzz){
     }
 }
 
-function buzz(divisor, square, number){
-    if(number%divisor == 0){
-        addClass(square, "buzz", 3)
-    }
-}
 
 function fizz(divisor, square, number){
     if(number%divisor == 0){
         addClass(square, "fizz", 2)
+    }
+}
+
+function buzz(divisor, square, number){
+    if(number%divisor == 0){
+        addClass(square, "buzz", 3)
     }
 }
 
