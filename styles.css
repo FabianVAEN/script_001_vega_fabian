@@ -32,8 +32,9 @@
 }
 
 .fizzbuzz:hover{
+    background-color: beige;
     border: 1px solid black;
-    transform: translateY(-5px) rotate(10deg) ;
+    transform: translateY(-5px) rotate(5deg) ;
 }
 
 
