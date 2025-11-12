@@ -1,57 +1,68 @@
-function addClass(containerDiv, className){
-    console.log(containerDiv.classList)
-    containerDiv.classList.add(className)
+function applyFizzBuzz(number, fizzDivisor, buzzDivisor) {
+    const isFizz = number % fizzDivisor === 0;
+    const isBuzz = number % buzzDivisor === 0;
+    
+    if (isFizz && isBuzz) {
+        return 'fizzbuzz';
+    } else if (isFizz) {
+        return 'fizz';
+    } else if (isBuzz) {
+        return 'buzz';
+    }
+    return '';
 }
 
-function createMatrix(dimension, container,divisorFizz,divisorBuzz){
-    let counter = 1
-
-    for (let i = 0; i<dimension; i++){
-        const div= document.createElement("div")
-        addClass(div,"demo")
-
-        for (let j=0; j<dimension; j++){
-            const content = document.createElement("div");
-            addClass(content,"content")
-            fizz(divisorFizz,content, counter)
-            buzz(divisorBuzz,content, counter)
-            if (counter % divisorFizz === 0 && counter % divisorBuzz === 0 ){
-                addClass(content, "fizzbuzz")
-                content.textContent = counter
-            } 
-            else if (counter % divisorFizz === 0) {
-                content.textContent = counter
-            } 
-            else if (counter % divisorBuzz === 0) {
-                content.textContent = counter
+function createDivMatrix(n, container, fizzDivisor, buzzDivisor) {
+    container.innerHTML = '';
+    let counter = 1;
+    
+    for (let i = 0; i < n; i++) {
+        const row = document.createElement('section');
+        row.className = 'demo';
+    
+        for (let j = 0; j < n; j++) {
+            const div = document.createElement('div');
+            div.className = 'content';
+            
+            const className = applyFizzBuzz(counter, fizzDivisor, buzzDivisor);
+            
+            if (className) {
+                div.classList.add(className);
             }
-            else {
-                content.textContent = counter
-            }
-            div.appendChild(content)
-            counter++
+            
+            div.textContent = counter;
+            row.appendChild(div);
+            counter++;
         }
-        container.appendChild(div)
+        
+        container.appendChild(row);
     }
 }
 
+function buttonClicked(){
+    console.log("Me hicieron click")
 
-function fizz(divisor, square, number){
-    if(number%divisor == 0){
-        addClass(square, "fizz", 2)
-    }
+    const dimensionInput = document.getElementById("dimension")
+    const fizzInput = document.getElementById("fizz-divisor")
+    const buzzInput = document.getElementById("buzz-divisor")
+
+    const dimensionValue = parseInt(dimensionInput.value)
+    const fizzValue = parseInt(fizzInput.value)
+    const buzzValue = parseInt(buzzInput.value )
+
+    console.log(`El valor de dimension es: ${dimensionValue}`)
+    console.log(`El valor de fizz es: ${fizzValue}`)
+    console.log(`El valor de buzz es: ${buzzValue}`)
+
+    const matrixContainer = document.getElementById("matrix-container");
+    createDivMatrix(dimensionValue, matrixContainer, fizzValue, buzzValue);
+
 }
 
-function buzz(divisor, square, number){
-    if(number%divisor == 0){
-        addClass(square, "buzz", 3)
-    }
-}
+document.addEventListener('DOMContentLoaded', function() {
 
-
-document.addEventListener("DOMContentLoaded", function(){
-    console.log("Ya se cargo este DOM")
-    const container = document.querySelector(".container")
-    createMatrix(5,container,2,3)
-})
+    const btnGenerate = document.getElementById("generate")
+    
+    btnGenerate.addEventListener("click", buttonClicked)
+    });
 
